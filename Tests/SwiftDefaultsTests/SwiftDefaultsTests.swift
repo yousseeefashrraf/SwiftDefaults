@@ -1,12 +1,66 @@
+//
+//  SwiftDefaultsTests.swift
+//  SwiftDefaultsTests
+//
+//  Created by Youssef Ashraf on 27/07/2025.
+//
+
 import XCTest
 @testable import SwiftDefaults
 
-final class SwiftDefaultsTests: XCTestCase {
-    func testExample() throws {
-        // XCTest Documentation
-        // https://developer.apple.com/documentation/xctest
+enum UserType: String, DefaultValue{
+    typealias DefaultType = UserType
+    
+    case newUser = "newUser", currentUser = "currentUser"
+    static var key: String { "UserType" }
+    static var defaultValue: UserType { .newUser }
+}
 
-        // Defining Test Cases and Test Methods
-        // https://developer.apple.com/documentation/xctest/defining_test_cases_and_test_methods
+final class SwiftDefaultsTests: XCTestCase {
+    
+    override func setUpWithError() throws {
+        // Put setup code here. This method is called before the invocation of each test method in the class.
+    }
+    
+    override func tearDownWithError() throws {
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    }
+    
+    func testExample() throws {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        // Any test you write for XCTest can be annotated as throws and async.
+        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
+        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    }
+    
+    func testPerformanceExample() throws {
+        // This is an example of a performance test case.
+        self.measure {
+            // Put the code you want to measure the time of here.
+        }
+    }
+    
+}
+
+final class UserDefaultsManagerTest: XCTestCase{
+    
+    @MainActor func testGetStoredValueWithoutInit(){
+        let result = UserDefaultsManager.shared.getStoredValue(forType: UserType.self)
+        
+        XCTAssertNil(result)
+    }
+    
+    @MainActor func testInit(){
+        UserDefaultsManager.shared.initiate(forType: UserType.self)
+        let result = UserDefaultsManager.shared.isStored(forKey: UserType.key)
+        XCTAssertEqual(result, true)
+    }
+    
+    @MainActor func testGetStoredValueWithInit(){
+        let result = UserDefaultsManager.shared.getStoredValue(forType: UserType.self)
+        
+        XCTAssertEqual(result, "newUser")
+
     }
 }
