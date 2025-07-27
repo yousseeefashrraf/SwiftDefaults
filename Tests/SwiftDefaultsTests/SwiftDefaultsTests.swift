@@ -45,19 +45,19 @@ final class SwiftDefaultsTests: XCTestCase {
 
 final class UserDefaultsManagerTest: XCTestCase{
     
-    @MainActor func testGetStoredValueWithoutInit(){
+     func testGetStoredValueWithoutInit(){
         let result = UserDefaultsManager.shared.getStoredValue(forType: UserType.self)
         
         XCTAssertNil(result)
     }
     
-    @MainActor func testInit(){
+     func testInit(){
         UserDefaultsManager.shared.initiate(forType: UserType.self)
         let result = UserDefaultsManager.shared.isStored(forKey: UserType.key)
         XCTAssertEqual(result, true)
     }
     
-    @MainActor func testGetStoredValueWithInit(){
+     func testGetStoredValueWithInit(){
         let result = UserDefaultsManager.shared.getStoredValue(forType: UserType.self)
         
         XCTAssertEqual(result, "newUser")

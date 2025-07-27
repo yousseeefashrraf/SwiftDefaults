@@ -14,9 +14,8 @@ protocol DefaultValue{
     static var key: String {get}
 }
 
-@MainActor
-final class UserDefaultsManager {
-    static var shared = UserDefaultsManager()
+final class UserDefaultsManager: @unchecked Sendable {
+    static let shared = UserDefaultsManager()
     private init () {}
     
     /// Initializes a `UserDefaults` entry with a default value if it does not already exist.
