@@ -14,7 +14,8 @@ public protocol DefaultValue{
     static var key: String {get}
 }
 
-public final class UserDefaultsManager: @unchecked Sendable {
+@available(iOS 13.0.0, *)
+public final actor UserDefaultsManager: @unchecked Sendable {
     public static let shared = UserDefaultsManager()
     private init () {}
     
