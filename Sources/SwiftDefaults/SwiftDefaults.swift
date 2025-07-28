@@ -52,7 +52,7 @@ public final class UserDefaultsManager: @unchecked Sendable {
     ///
     public func store<T: DefaultValue>(forType type: T.Type, value: String) where T.defaultType: RawRepresentable, T.defaultType.RawValue == String {
         if isStored(forKey: type.key) {
-            UserDefaults.standard.setValue(value.rawValue, forKey: type.key)
+            UserDefaults.standard.setValue(value, forKey: type.key)
         }
     }
     
