@@ -50,7 +50,7 @@ public final class UserDefaultsManager: @unchecked Sendable {
     ///   - type: A type conforming to `DefaultValue` protocol, used to get the key.
     ///   - value: The value to store in `UserDefaults`.
     ///
-    public func store<T: DefaultValue>(forType type: T.Type, value: String) where T: RawRepresentable, T.defaultType.RawValue == String {
+    public func store<T: DefaultValue>(forType type: T.Type, value: String) where T.defaultValue: RawRepresentable, T.defaultType.RawValue == String {
         if isStored(forKey: type.key) {
             UserDefaults.standard.setValue(value.rawValue, forKey: type.key)
         }
